@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using Vidly.Models;
+using Vidly.ViewModels;
 
 namespace Vidly.Controllers
 {
@@ -12,12 +13,48 @@ namespace Vidly.Controllers
         // GET: Movies/Random
         public ActionResult Random()
         {
-            var movie = new Movie() { Name ="Shrek"};
-            //return View(movie);
-            //return Content("Hello World", "XXX");
-            //return HttpNotFound("No se puede encontrar el recurso");
-            //return new EmptyResult();
-            return RedirectToAction("Index", "Home", new { page = 1, orderBy = "name" });
+            var movie = new Movie() { Name = "Shrek" };
+
+            var customers = new List<Customer>()
+            {
+                new Customer(){ Name ="Customer 1" },
+                new Customer(){ Name ="Customer 2" }
+            };
+
+            var viewModel = new RandomMovieViewModel()
+            {
+                 Customers = customers,
+                 Movie = movie
+            };
+
+
+            return View(viewModel);
+        }
+
+        public ActionResult Edit(int id)
+        {
+            return Content("id=" + id);
+        }
+
+        // movies
+        public ActionResult Index(int? page, string sortBy)
+        {
+            page = page.HasValue ? page : 1;
+            sortBy = !string.IsNullOrEmpty(sortBy) ? sortBy : "name";
+
+            return Content(string.Format("pageIndex={0}&sortBy={1}",page,sortBy));
+        }
+
+        [Route("movies/released/{year}/{month:regex(\\d{2}):range(1,12)}")]
+        public ActionResult ByReleaseDate(int year,int month)
+        {
+            return Content(year +"/" +month);
+        }
+
+        [Route("Movies/Movies")]
+        public ActionResult GetMovies()
+        {
+            return View();
         }
     }
 }
