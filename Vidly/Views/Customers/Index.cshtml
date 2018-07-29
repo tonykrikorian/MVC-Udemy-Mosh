@@ -1,0 +1,33 @@
+﻿@model Vidly.ViewModels.RandomMovieViewModel
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>Customers</h1>
+<br /><br />
+
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>Customers</h3>
+    </div>
+    <div class="panel-body">
+        @if (Model.Customers.Any())
+        {
+            <table class="table table-bordered">
+                @foreach (var item in Model.Customers)
+                {
+                    <tr>
+                        <td>@Html.ActionLink(@item.Name, "details", "customers", new { id = item.Id }, null)</td>
+                    </tr>
+                }
+            </table>
+        }
+        else {
+            <p>Aun no hay clientes disponibles</p>
+        }
+    </div>
+    </div>
+
+
