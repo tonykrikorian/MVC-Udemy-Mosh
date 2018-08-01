@@ -206,6 +206,10 @@
     <Compile Include="Migrations\201807310508285_InitialModel.Designer.cs">
       <DependentUpon>201807310508285_InitialModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201808010931556_AddIsSuscribedToNewsletter.cs" />
+    <Compile Include="Migrations\201808010931556_AddIsSuscribedToNewsletter.Designer.cs">
+      <DependentUpon>201808010931556_AddIsSuscribedToNewsletter.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -302,6 +306,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201807310508285_InitialModel.resx">
       <DependentUpon>201807310508285_InitialModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201808010931556_AddIsSuscribedToNewsletter.resx">
+      <DependentUpon>201808010931556_AddIsSuscribedToNewsletter.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
