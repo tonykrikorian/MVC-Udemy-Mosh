@@ -16,10 +16,15 @@
         @if (Model.Customers.Any())
         {
             <table class="table table-bordered">
+                <tr>
+                    <th>Customer</th>
+                    <th>Discount Rate</th>
+                </tr>
                 @foreach (var item in Model.Customers)
                 {
                     <tr>
                         <td>@Html.ActionLink(@item.Name, "details", "customers", new { id = item.Id }, null)</td>
+                        <td>@item.MembershipType.DiscountRate%</td>
                     </tr>
                 }
             </table>
