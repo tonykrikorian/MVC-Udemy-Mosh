@@ -11,26 +11,24 @@ namespace Vidly.Controllers
     public class CustomersController : Controller
     {
         // GET: Customers
-
-        private List<Customer> customers;
+        private ApplicationDbContext _context;
         private RandomMovieViewModel viewModel;
 
         public CustomersController()
         {
-            this.customers = new List<Customer>()
-            {
-                new Customer(){ Id=1, Name ="Tony Krikorian" },
-                new Customer(){ Id=2, Name ="Tarin Gonzales" },
-                new Customer(){ Id=3, Name ="Claudio Altamirano"}
-            };
-
             this.viewModel = new RandomMovieViewModel();
+            this._context = new ApplicationDbContext();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            _context.Dispose();
         }
         // Index
         public ActionResult Index()
         {
 
-            viewModel.Customers = customers;
+            viewModel.Customers = _context.Customer.ToList();
             return View(viewModel);
         }
 
@@ -38,7 +36,7 @@ namespace Vidly.Controllers
         [Route("customers/details/{id:regex(\\d)}")]
         public ActionResult Details(int id)
         {
-            var customer = customers.Where(x => x.Id == id).Select(x => x).SingleOrDefault();
+            var customer = _context.Customer.Where(x => x.Id == id).Select(x => x).SingleOrDefault();
             viewModel.Customer = customer;
             return View(viewModel);
         }
